@@ -1,23 +1,43 @@
 import pygame
+import math
 
-def casteljau(p, t):
-    if len(p) == 1:
-        return p[0]
-    q = []
-    for i in range(len(p)-1):
-        q.append(((1-t)*p[i][0] + t*p[i+1][0], (1-t)*p[i][1] + t*p[i+1][1]))
+def ponto_medio(p1, p2):
+    return ((p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2)
 
-    return casteljau(q, t)
+def casteljau(p, tolerancia, curva):
+    p0, p1, p2, p3 = p
 
+    distancia = math.dist(p0, p3)
+    if distancia < tolerancia:
+        curva.append(p3)
+        return
 
-def desenha_curva(tela, pontos, passos=100):
-    curva = [casteljau(pontos, k/passos) for k in range(passos + 1)]
+    p01 = ponto_medio(p0, p1)
+    p12 = ponto_medio(p1, p2)
+    p23 = ponto_medio(p2, p3) 
+
+    p012 = ponto_medio(p01, p12)
+    p123 = ponto_medio(p12, p23)
+
+    p0123 = ponto_medio(p012, p123)
+
+    casteljau([p0, p01, p012, p0123], tolerancia, curva)
+    casteljau([p0123, p123, p23, p3], tolerancia, curva)
+
+def gerar_curva(p, tolerancia=2.0):
+    curva = [p[0]]
+    casteljau(p, tolerancia, curva)
+    return curva
+
+def desenha_curva(tela, pontos):
+    curva = gerar_curva(pontos, tolerancia=2)
 
     pygame.draw.lines(tela, (200, 0, 0), False, pontos, 1)
     for pt in pontos:
         pygame.draw.circle(tela, (255, 0, 0), pt, 5)
 
     pygame.draw.lines(tela, (0, 0, 0), False, curva, 2)
+
 
 
 if __name__ == "__main__":
