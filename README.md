@@ -105,6 +105,7 @@ Base para visualização dos polígonos e curvas.
 | Controle da suavidade | Número de passos | Tolerância           |
 | Uso prático           | Educacional      | Profissional         |
 
+---------------------------------------------
 
 🖥️ Tecnologias Utilizadas
 
@@ -114,22 +115,4 @@ Pygame
 
 Matemática computacional aplicada à Computação Gráfica
 
-▶️ Como Executar
-
-Instale o Pygame:
-
-pip install pygame
-
-
-Execute qualquer script do repositório:
-
-python nome_do_arquivo.py
-
-
-Uma janela gráfica será aberta exibindo:
-
-Pontos de controle;
-
-Curvas geradas;
-
-Polígonos originais e recortados.
+---------------------------------------------
