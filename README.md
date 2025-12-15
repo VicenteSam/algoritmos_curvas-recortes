@@ -1,52 +1,65 @@
 Algoritmos de Curvas e Recortes Gráficos
 
-Este repositório reúne implementações práticas de algoritmos clássicos de Computação Gráfica, com foco na geração de curvas e recorte de primitivas geométricas, desenvolvidas em Python utilizando a biblioteca Pygame.
+Implementação de algoritmos clássicos de Computação Gráfica para geração de curvas e recorte geométrico, desenvolvidos em Python com Pygame, com foco didático, visualização e comparação de resultados.
 
-O objetivo principal é estudar, comparar e visualizar o funcionamento desses algoritmos, destacando suas diferenças conceituais, desempenho e resultados visuais.
+📌 Objetivos do Projeto
 
-📌 Algoritmos Implementados
-🔹 Curvas de Bézier
+Implementar algoritmos fundamentais de Computação Gráfica;
 
-Foram implementadas duas abordagens distintas para geração de curvas de Bézier:
+Visualizar o funcionamento matemático e geométrico das técnicas;
 
-1. Método Paramétrico (Forma Polinomial)
+Comparar diferentes abordagens para geração de curvas;
 
-Baseado na formulação matemática das curvas de Bézier.
+Integrar algoritmos de rasterização e recorte;
 
-Utiliza coeficientes binomiais (polinômios de Bernstein).
+Consolidar conceitos teóricos por meio de implementação prática.
 
-A curva é obtida avaliando o parâmetro t ∈ [0, 1] em passos regulares.
+🧮 Algoritmos Implementados
+1. Curvas de Bézier
+1.1 Método Paramétrico (Polinômios de Bernstein)
 
-📎 Características:
+A curva é gerada pela avaliação direta da equação paramétrica da curva de Bézier:
 
-Implementação direta e simples.
+O parâmetro t varia no intervalo [0, 1];
 
-Custo computacional proporcional ao número de pontos amostrados.
+Para cada valor de t, calcula-se um ponto da curva;
 
-Fácil controle da suavidade via número de passos.
+Utiliza coeficientes binomiais (comb).
 
-2. Algoritmo de De Casteljau (Divisão Recursiva)
+Características:
 
-Baseado em interpolações lineares sucessivas entre os pontos de controle.
+Implementação simples e direta;
 
-Utiliza subdivisão recursiva até que os segmentos sejam suficientemente pequenos.
+Suavidade controlada pelo número de passos;
 
-📎 Características:
+Custo computacional proporcional à quantidade de amostras.
 
-Mais estável numericamente.
+1.2 Algoritmo de De Casteljau
 
-A densidade de pontos se adapta à curvatura.
+Baseado em interpolações lineares sucessivas entre os pontos de controle:
 
-Muito utilizado em sistemas gráficos reais.
+O algoritmo subdivide a curva recursivamente;
 
-🔹 Algoritmos de Recorte
-Sutherland–Hodgman (Recorte de Polígonos)
+A subdivisão continua até atingir uma tolerância mínima;
 
-Realiza o recorte de um polígono contra uma janela convexa.
+A curva é aproximada por segmentos de reta.
 
-O polígono é processado aresta por aresta da janela.
+Características:
 
-São tratados os quatro casos clássicos:
+Alta estabilidade numérica;
+
+Melhor adaptação à curvatura local;
+
+Amplamente utilizado em sistemas gráficos reais.
+
+2. Algoritmos de Recorte
+2.1 Sutherland–Hodgman (Recorte de Polígonos)
+
+Algoritmo utilizado para recortar um polígono contra uma janela convexa:
+
+O polígono é processado contra cada aresta da janela;
+
+São analisados quatro casos clássicos:
 
 Dentro → Dentro
 
@@ -56,22 +69,31 @@ Dentro → Fora
 
 Fora → Fora
 
-📎 Particularidades da implementação:
+Detalhes da implementação:
 
-Teste de ponto interno feito via produto vetorial.
+Teste de ponto interno usando produto vetorial;
 
-Cálculo de interseções inspirado no Cohen–Sutherland.
+Cálculo de interseções inspirado no algoritmo de Cohen–Sutherland;
 
-Desenho das arestas feito com o algoritmo de Bresenham.
+Integração com o algoritmo de Bresenham para visualização.
 
-🔹 Algoritmo de Bresenham (Linhas)
+3. Rasterização de Linhas
+3.1 Algoritmo de Bresenham
 
-Utilizado para rasterizar linhas no plano cartesiano.
+Utilizado para desenhar linhas no plano cartesiano:
 
-Trabalha apenas com operações inteiras.
+Trabalha apenas com operações inteiras;
 
-Integrado ao algoritmo de recorte para visualização precisa.
+Alta eficiência computacional;
 
+Base para visualização dos polígonos e curvas.
+
+📊 Comparação entre Métodos de Curvas
+Critério	Paramétrico	De Casteljau
+Tipo de cálculo	Avaliação direta	Subdivisão recursiva
+Estabilidade numérica	Média	Alta
+Controle da suavidade	Número de passos	Tolerância
+Uso prático	Educacional	Profissional
 🖥️ Tecnologias Utilizadas
 
 Python 3
@@ -87,33 +109,15 @@ Instale o Pygame:
 pip install pygame
 
 
-Execute qualquer arquivo Python do repositório:
+Execute qualquer script do repositório:
 
 python nome_do_arquivo.py
 
 
 Uma janela gráfica será aberta exibindo:
 
-Pontos de controle
+Pontos de controle;
 
-Curvas geradas
+Curvas geradas;
 
-Polígonos originais e recortados
-
-📊 Comparações Realizadas
-Aspecto	Paramétrico	De Casteljau
-Forma de cálculo	Avaliação direta	Subdivisão recursiva
-Estabilidade numérica	Média	Alta
-Controle da suavidade	Passos fixos	Tolerância
-Uso prático	Didático	Profissional
-🎓 Finalidade Acadêmica
-
-Este projeto foi desenvolvido com fins educacionais, visando:
-
-Compreender algoritmos fundamentais de CG;
-
-Visualizar o comportamento geométrico das curvas;
-
-Comparar abordagens matemáticas e computacionais;
-
-Consolidar conceitos de rasterização e recorte.
+Polígonos originais e recortados.
